@@ -1,4 +1,4 @@
-// Generated from c://Users//Mariana//OneDrive - docentes.frm.utn.edu.ar//SSL//2025//ANTLR4//antlr-calculator-project//Calculator.g4 by ANTLR 4.13.1
+// Generated from c:/Users/Usuario/ssl-antlr-calculator/Calculator.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -7,33 +7,63 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface CalculatorListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by {@link CalculatorParser#prog}.
+	 * Enter a parse tree produced by {@link CalculatorParser#programa}.
 	 * @param ctx the parse tree
 	 */
-	void enterProg(CalculatorParser.ProgContext ctx);
+	void enterPrograma(CalculatorParser.ProgramaContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CalculatorParser#prog}.
+	 * Exit a parse tree produced by {@link CalculatorParser#programa}.
 	 * @param ctx the parse tree
 	 */
-	void exitProg(CalculatorParser.ProgContext ctx);
+	void exitPrograma(CalculatorParser.ProgramaContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CalculatorParser#stat}.
+	 * Enter a parse tree produced by {@link CalculatorParser#instruccion}.
 	 * @param ctx the parse tree
 	 */
-	void enterStat(CalculatorParser.StatContext ctx);
+	void enterInstruccion(CalculatorParser.InstruccionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CalculatorParser#stat}.
+	 * Exit a parse tree produced by {@link CalculatorParser#instruccion}.
 	 * @param ctx the parse tree
 	 */
-	void exitStat(CalculatorParser.StatContext ctx);
+	void exitInstruccion(CalculatorParser.InstruccionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CalculatorParser#expr}.
+	 * Enter a parse tree produced by {@link CalculatorParser#asignacion}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpr(CalculatorParser.ExprContext ctx);
+	void enterAsignacion(CalculatorParser.AsignacionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CalculatorParser#expr}.
+	 * Exit a parse tree produced by {@link CalculatorParser#asignacion}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpr(CalculatorParser.ExprContext ctx);
+	void exitAsignacion(CalculatorParser.AsignacionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CalculatorParser#imprimir}.
+	 * @param ctx the parse tree
+	 */
+	void enterImprimir(CalculatorParser.ImprimirContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorParser#imprimir}.
+	 * @param ctx the parse tree
+	 */
+	void exitImprimir(CalculatorParser.ImprimirContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CalculatorParser#expresion}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpresion(CalculatorParser.ExpresionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorParser#expresion}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpresion(CalculatorParser.ExpresionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CalculatorParser#termino}.
+	 * @param ctx the parse tree
+	 */
+	void enterTermino(CalculatorParser.TerminoContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CalculatorParser#termino}.
+	 * @param ctx the parse tree
+	 */
+	void exitTermino(CalculatorParser.TerminoContext ctx);
 }

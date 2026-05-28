@@ -1,29 +1,37 @@
 grammar Calculator;
 
-//Gramatica
-prog: stat+;
+// --- REGLAS SINTÁCTICAS (Parser) ---
+programa : instruccion+ EOF ;
 
-stat: expr NEWLINE?              #printExpr
-    | ID EQ expr NEWLINE?        #assign
-    | NEWLINE                   #blank
-    ;
+instruccion : asignacion
+            | imprimir ;
 
-expr: expr op=(MUL|DIV) expr    #MulDiv
-    | expr op=(ADD|SUB) expr    #AddSub
-    | INT                       #int
-    | ID                        #id
-    | LPAREN expr RPAREN        #parens
-    ;
+asignacion : ID ASIGNAR expresion PUNTOCOMA ;
 
-//Lexemas
-MUL : '*';
-DIV : '/';
-ADD : '+';
-SUB : '-';
-EQ: '=';
-ID : [a-zA-Z]+;
-INT : [0-9];
-LPAREN : '(';
-RPAREN : ')';
-NEWLINE:'\r'? '\n';
-WS: [ \t]+ -> skip;
+imprimir : PRINT LPAREN expresion RPAREN PUNTOCOMA ;
+
+// Manejo estricto de precedencia: multiplicacion/division primero, suma/resta despues
+expresion : expresion (POR | DIV) expresion
+          | expresion (MAS | MENOS) expresion
+          | termino ;
+
+termino : NUMERO
+        | ID
+        | LPAREN expresion RPAREN ;
+
+// --- REGLAS LÉXICAS (Lexer / Tokens) ---
+PRINT     : 'print' ;
+ASIGNAR   : '=' ;
+PUNTOCOMA : ';' ;
+LPAREN    : '(' ;
+RPAREN    : ')' ;
+MAS       : '+' ;
+MENOS     : '-' ;
+POR       : '*' ;
+DIV       : '/' ;
+
+ID        : [a-zA-Z]+ ;
+NUMERO    : [0-9]+ ;
+
+// Ignorar espacios y saltos de línea
+WS        : [ \t\r\n]+ -> skip ;

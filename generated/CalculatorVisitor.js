@@ -1,4 +1,4 @@
-// Generated from c://Users//Mariana//OneDrive - docentes.frm.utn.edu.ar//SSL//2025//ANTLR4//antlr-calculator-project//Calculator.g4 by ANTLR 4.13.2
+// Generated from Calculator.g4 by ANTLR 4.13.2
 // jshint ignore: start
 import antlr4 from 'antlr4';
 
@@ -6,56 +6,38 @@ import antlr4 from 'antlr4';
 
 export default class CalculatorVisitor extends antlr4.tree.ParseTreeVisitor {
 
-	// Visit a parse tree produced by CalculatorParser#prog.
-	visitProg(ctx) {
+	// Visit a parse tree produced by CalculatorParser#programa.
+	visitPrograma(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
 
-	// Visit a parse tree produced by CalculatorParser#printExpr.
-	visitPrintExpr(ctx) {
+	// Visit a parse tree produced by CalculatorParser#instruccion.
+	visitInstruccion(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
 
-	// Visit a parse tree produced by CalculatorParser#assign.
-	visitAssign(ctx) {
+	// Visit a parse tree produced by CalculatorParser#asignacion.
+	visitAsignacion(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
 
-	// Visit a parse tree produced by CalculatorParser#blank.
-	visitBlank(ctx) {
+	// Visit a parse tree produced by CalculatorParser#imprimir.
+	visitImprimir(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
 
-	// Visit a parse tree produced by CalculatorParser#parens.
-	visitParens(ctx) {
+	// Visit a parse tree produced by CalculatorParser#expresion.
+	visitExpresion(ctx) {
 	  return this.visitChildren(ctx);
 	}
 
 
-	// Visit a parse tree produced by CalculatorParser#MulDiv.
-	visitMulDiv(ctx) {
-	  return this.visitChildren(ctx);
-	}
-
-
-	// Visit a parse tree produced by CalculatorParser#AddSub.
-	visitAddSub(ctx) {
-	  return this.visitChildren(ctx);
-	}
-
-
-	// Visit a parse tree produced by CalculatorParser#id.
-	visitId(ctx) {
-	  return this.visitChildren(ctx);
-	}
-
-
-	// Visit a parse tree produced by CalculatorParser#int.
-	visitInt(ctx) {
+	// Visit a parse tree produced by CalculatorParser#termino.
+	visitTermino(ctx) {
 	  return this.visitChildren(ctx);
 	}
 

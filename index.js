@@ -1,62 +1,57 @@
-import CalculatorLexer from "./generated/CalculatorLexer.js";
-import CalculatorParser from "./generated/CalculatorParser.js";
-import { CustomCalculatorListener } from "./CustomCalculatorListener.js";
-import { CustomCalculatorVisitor } from "./CustomCalculatorVisitor.js";
-import antlr4, { CharStreams, CommonTokenStream, ParseTreeWalker } from "antlr4";
-import readline from 'readline';
 import fs from 'fs';
+import antlr4 from 'antlr4';
+import CalculatorLexer from './generated/CalculatorLexer.js';
+import CalculatorParser from './generated/CalculatorParser.js';
+import CustomCalculatorVisitor from './CustomCalculatorVisitor.js';
 
-async function main() {
-    let input;
+// Leer el archivo de entrada
+const input = fs.readFileSync('correcto1.txt', 'utf8');
 
-    // Intento leer la entrada desde el archivo input - en forma sincrona.
-    try {
-        input = fs.readFileSync('input.txt', 'utf8');
-    } catch (err) {
-        // Si no es posible leer el archivo, solicitar la entrada del usuario por teclado
-        input = await leerCadena(); // Simula lectura síncrona
-        console.log(input);
+// Configurar el flujo de ANTLR4
+const chars = new antlr4.InputStream(input);
+const lexer = new CalculatorLexer(chars);
+const tokens = new antlr4.CommonTokenStream(lexer);
+const parser = new CalculatorParser(tokens);
+
+// ---------------------------------------------------------
+// TAREA 1: Análisis léxico y sintáctico (Manejo de Errores)
+// ---------------------------------------------------------
+parser.removeErrorListeners();
+parser.addErrorListener({
+    syntaxError: (recognizer, offendingSymbol, line, column, msg, e) => {
+        console.error(`\n[ERROR SINTÁCTICO] Línea ${line}:${column} - Causa del problema: ${msg}`);
     }
+});
 
-    // Proceso la entrada con el analizador e imprimo el arbol de analisis en formato texto
-    let inputStream = CharStreams.fromString(input);
-    let lexer = new CalculatorLexer(inputStream);
-    let tokenStream = new CommonTokenStream(lexer);
-    let parser = new CalculatorParser(tokenStream);
-    let tree = parser.prog();
-    
-    // Verifico si se produjeron errores
-    if (parser.syntaxErrorsCount > 0) {
-        console.error("\nSe encontraron errores de sintaxis en la entrada.");
-    } 
-    else {
-        console.log("\nEntrada válida.");
-        const cadena_tree = tree.toStringTree(parser.ruleNames);
-        console.log(`Árbol de derivación: ${cadena_tree}`);
+const tree = parser.programa(); // Generar el árbol desde el axioma
 
-        // Utilizo un listener y un walker para recorrer el arbol e indicar cada vez que reconoce una sentencia (stat)
-        //const listener = new CustomCalculatorListener();
-        // ParseTreeWalker.DEFAULT.walk(listener, tree);
+if (parser._syntaxErrors > 0) {
+    console.error("\nEl análisis contiene errores de sintaxis. Corregí el archivo input.txt.");
+} else {
+    console.log("\n--- [OK] ANÁLISIS SINTÁCTICO Y LÉXICO CORRECTO ---");
 
-        // Utilizo un visitor para visitar los nodos que me interesan de mi arbol
-        const visitor = new CustomCalculatorVisitor();
-        visitor.visit(tree);   
-    }
-}
-
-function leerCadena() {
-    const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
+    // ---------------------------------------------------------
+    // TAREA 2: Tabla de lexemas-tokens
+    // ---------------------------------------------------------
+    console.log("\n--- TAREA 2: TABLA DE LEXEMAS Y TOKENS ---");
+    tokens.fill();
+    tokens.tokens.forEach(t => {
+        if (t.type !== antlr4.Token.EOF) {
+            const tokenName = parser.symbolicNames[t.type];
+            console.log(`Lexema: '${t.text.padEnd(12)}' -> Token: ${tokenName}`);
+        }
     });
 
-    return new Promise(resolve => {
-        rl.question("Ingrese una cadena: ", (answer) => {
-            rl.close();
-            resolve(answer);
-        });
-    });
-}
+    // ---------------------------------------------------------
+    // TAREA 3: Árbol de análisis sintáctico concreto
+    // ---------------------------------------------------------
+    console.log("\n--- TAREA 3: ÁRBOL DE ANÁLISIS SINTÁCTICO ---");
+    const cadena_tree = tree.toStringTree(parser.ruleNames);
+    console.log(cadena_tree);
 
-// Ejecuta la función principal
-main();
+    // ---------------------------------------------------------
+    // TAREA 4: Interpretación y Traducción
+    // ---------------------------------------------------------
+    const visitor = new CustomCalculatorVisitor();
+    visitor.visit(tree); // Ejecuta el recorrido semántico
+}

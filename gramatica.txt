@@ -1,0 +1,9 @@
+Gramática:
+<programa> ::= (<instruccion> };
+< instruccion> *= <asignacion> | <imprimir>; 
+‹asignacion> ::= <id> "=" ‹expresion> ";";
+<imprimir>= ::= "print" "("<expresion>")";";
+<expresion› = <termino> {("+"|"-"|"*"|"/") < termino > };
+<termino> ::=  <numero> |<id> | "(" <expresion> ")" ;
+<id> := [a-zA-Z]+;
+ <numero> ::= [0-9]+;
