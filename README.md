@@ -13,3 +13,20 @@ Use ANTLR4 para definir las reglas del lenguaje yJavaScript para darle la lógic
 * `CustomCalculatorVisitor.js`: Acá está la lógica matemática. Es el archivo que procesa las cuentas paso a paso y guarda las variables en la memoria de la compu mientras corre el programa.
 * `generated/`: Es la carpeta donde se guardan los archivos automáticos que genera ANTLR4 a partir de mi gramática.
 * Archivos de prueba: Creé 4 ejemplos para probar el programa.
+
+#  Requisitos para correr el proyecto
+
+Para poder probar este analizador en tu compu, vas a necesitar tener instalado lo siguiente:
+1. **Node.js** (Versión actual o superior).
+2. **Java** (Es necesario para que ANTLR4 pueda compilar la gramática).
+
+---
+
+# Cómo poner en marcha el programa
+
+Seguí estos simples pasos desde la terminal o consola de comandos:
+
+# 1. Instalar las dependencias
+Primero, parate en la carpeta del proyecto y descargá las librerías necesarias ejecutando:
+```bash
+npm install
