@@ -30,3 +30,4 @@ Seguí estos simples pasos desde la terminal o consola de comandos:
 Primero, parate en la carpeta del proyecto y descargá las librerías necesarias ejecutando:
 ```bash
 npm install
+ 
